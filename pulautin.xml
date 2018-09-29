@@ -20,6 +20,11 @@
 		<file name="CMakeLists.txt">
 			<section template="cmake/header"/>
 			<section template="cmake/executable"/>
+			<section template="cmake/sfml_graphics_25">
+				<macros>
+					<macro name="TARGET_NAME" value="{{EXECUTABLE_NAME}}"/>
+				</macros>
+			</section>
 		</file>
 
 		<!-- CMakeLists for headers -->

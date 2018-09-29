@@ -15,3 +15,8 @@ add_executable(Minimal ${EXECUTABLE_HEADERS} ${EXECUTABLE_SOURCES})
 
 target_include_directories(Minimal PUBLIC include)
 
+# Find and link SFML
+find_package(SFML 2.5 COMPONENTS system window graphics REQUIRED)
+target_link_libraries(Minimal sfml-system sfml-window sfml-graphics)
+
+

@@ -1,12 +1,10 @@
-#include <cstdio>
-
-#include "Types.hpp"
+#include "Window.hpp"
 
 
 int main(void) {
-	MyType projName = "RobokasiV2";
+    Window window(Window::Settings("RobokasiV2"));
 
-    printf("Hello %s!\n", projName.c_str());
+    window.loop();
 
     return 0;
 }

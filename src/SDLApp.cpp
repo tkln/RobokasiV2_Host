@@ -22,10 +22,22 @@ SDLApp::SDLApp(const SDLApp::Settings &settings) :
          SDL_WINDOWPOS_UNDEFINED,
          (int)_settings.windowWidth,
          (int)_settings.windowHeight,
-         SDL_WINDOW_SHOWN);
+         SDL_WINDOW_SHOWN | SDL_WINDOW_OPENGL);
 
     if (_window == nullptr) {
         printf("Error: SDL Window could not be created! SDL_Error: %s\n", SDL_GetError());
+        return;
+    }
+
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3);
+    SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+
+    _glCtx = SDL_GL_CreateContext(_window);
+
+    if (_glCtx == nullptr) {
+        printf("Error: SDL OpenGL context could not be created! SDL_Error: %s\n",
+               SDL_GetError());
         return;
     }
 }
@@ -33,6 +45,7 @@ SDLApp::SDLApp(const SDLApp::Settings &settings) :
 SDLApp::~SDLApp()
 {
     // Destroy window and quit SDL subsystems
+    SDL_GL_DeleteContext(_glCtx);
     SDL_DestroyWindow(_window);
     SDL_Quit();
 }

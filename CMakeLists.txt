@@ -2,21 +2,29 @@
 # Manual editing of this file is not recommended
 
 cmake_minimum_required(VERSION 2.8)
-project(RobokasiV2)
+project(RobokasiV2_Host)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# Add executable: Minimal
+# Add executable: Robokasi
 add_subdirectory(include)
 add_subdirectory(src)
 
-add_executable(Minimal ${EXECUTABLE_HEADERS} ${EXECUTABLE_SOURCES})
+add_executable(Robokasi ${EXECUTABLE_HEADERS} ${EXECUTABLE_SOURCES})
 
-target_include_directories(Minimal PUBLIC include)
+target_include_directories(Robokasi PUBLIC include)
 
-# Find and link SFML
-find_package(SFML 2.5 COMPONENTS system window graphics REQUIRED)
-target_link_libraries(Minimal sfml-system sfml-window sfml-graphics)
+#Find and link SDL 2
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/modules)
 
+if(WIN32)
+    set(SDL2_PATH $ENV{SDL2_DIR})
+    if(NOT SDL2_PATH)
+        message(FATAL_ERROR "Please set SDL2_DIR environment variable to point to SDL 2 installation directory.")
+    endif()
+endif()
 
+find_package(SDL2 REQUIRED)
+include_directories(${SDL2_INCLUDE_DIR})
+target_link_libraries(Robokasi PUBLIC ${SDL2_LIBRARY})

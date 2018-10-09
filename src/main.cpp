@@ -1,10 +1,14 @@
-#include "Window.hpp"
+//
+// Created by Lehdari on 2018-10-10.
+//
+
+#include "SDLApp.hpp"
 
 
-int main(void) {
-    Window window(Window::Settings("RobokasiV2"));
+int main(int argv, char** args) {
 
-    window.loop();
+    SDLApp app(SDLApp::Settings("Robokasi"));
+    app.loop();
 
     return 0;
 }

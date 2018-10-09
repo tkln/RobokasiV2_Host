@@ -39,6 +39,7 @@ public:
 private:
     Settings        _settings;
     SDL_Window*     _window;
+    SDL_GLContext   _glCtx;
     bool            _quit; // flag for quitting the application
 
     // Window event handling loop

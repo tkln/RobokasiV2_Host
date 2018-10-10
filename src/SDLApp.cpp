@@ -2,6 +2,8 @@
 // Created by Lehdari on 2018-10-10.
 //
 
+#include <GL/gl3w.h>
+
 #include "SDLApp.hpp"
 
 
@@ -10,6 +12,8 @@ SDLApp::SDLApp(const SDLApp::Settings &settings) :
     _window     (nullptr),
     _quit       (false)
 {
+    int err;
+
     // Initialize SDL
     if (SDL_Init(SDL_INIT_VIDEO) < 0) {
         printf("Error: Could not initialize SDL!\n");
@@ -38,6 +42,12 @@ SDLApp::SDLApp(const SDLApp::Settings &settings) :
     if (_glCtx == nullptr) {
         printf("Error: SDL OpenGL context could not be created! SDL_Error: %s\n",
                SDL_GetError());
+        return;
+    }
+
+    err = gl3wInit();
+    if (err) {
+        printf("Error: gl3wInit failed\n");
         return;
     }
 }

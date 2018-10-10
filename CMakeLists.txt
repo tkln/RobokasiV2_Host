@@ -10,6 +10,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # Add executable: Robokasi
 add_subdirectory(include)
 add_subdirectory(src)
+add_subdirectory(ext)
 
 add_executable(Robokasi ${EXECUTABLE_HEADERS} ${EXECUTABLE_SOURCES})
 
@@ -35,4 +36,5 @@ target_link_libraries(
     PUBLIC
     ${SDL2_LIBRARY}
     ${OPENGL_LIBRARIES}
+    gl3w
 )

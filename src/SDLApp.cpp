@@ -4,6 +4,10 @@
 
 #include <GL/gl3w.h>
 
+#include <imgui.h>
+#include <imgui_impl_sdl.h>
+#include <imgui_impl_opengl3.h>
+
 #include "SDLApp.hpp"
 
 
@@ -50,6 +54,11 @@ SDLApp::SDLApp(const SDLApp::Settings &settings) :
         printf("Error: gl3wInit failed\n");
         return;
     }
+
+    ImGui::CreateContext();
+    ImGuiIO &imgui_io = ImGui::GetIO();
+    ImGui_ImplSDL2_InitForOpenGL(_window, _glCtx);
+    ImGui_ImplOpenGL3_Init();
 }
 
 SDLApp::~SDLApp()
@@ -101,5 +110,17 @@ void SDLApp::handleEvents(SDL_Event& event)
 
 void SDLApp::render(void)
 {
-    //  Render OpenGL stuff here
+    ImGui_ImplOpenGL3_NewFrame();
+    ImGui_ImplSDL2_NewFrame(_window);
+    ImGui::NewFrame();
+
+    ImGui::Begin("Window");
+
+    ImGui::End();
+
+    ImGui::Render();
+
+    ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+
+    SDL_GL_SwapWindow(_window);
 }

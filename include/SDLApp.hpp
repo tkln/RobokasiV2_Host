@@ -39,7 +39,6 @@ public:
 private:
     Settings        _settings;
     SDL_Window*     _window;
-    SDL_Surface*    _surface;
     bool            _quit; // flag for quitting the application
 
     // Window event handling loop

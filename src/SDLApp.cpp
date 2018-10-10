@@ -8,7 +8,6 @@
 SDLApp::SDLApp(const SDLApp::Settings &settings) :
     _settings   (settings),
     _window     (nullptr),
-    _surface    (nullptr),
     _quit       (false)
 {
     // Initialize SDL
@@ -29,8 +28,6 @@ SDLApp::SDLApp(const SDLApp::Settings &settings) :
         printf("Error: SDL Window could not be created! SDL_Error: %s\n", SDL_GetError());
         return;
     }
-
-    _surface = SDL_GetWindowSurface(_window);
 }
 
 SDLApp::~SDLApp()
@@ -50,7 +47,7 @@ void SDLApp::loop(void)
 
         render();
 
-        SDL_UpdateWindowSurface(_window);
+        SDL_GL_SwapWindow(_window);
     }
 }
 

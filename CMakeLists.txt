@@ -37,4 +37,5 @@ target_link_libraries(
     ${SDL2_LIBRARY}
     ${OPENGL_LIBRARIES}
     gl3w
+    imgui
 )

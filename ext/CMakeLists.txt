@@ -1,4 +1,17 @@
-add_subdirectory(gl3w)
+add_library(gl3w
+    STATIC
+    imgui/examples/libs/gl3w/GL/gl3w.c
+)
+
+target_include_directories(gl3w
+    PUBLIC
+    imgui/examples/libs/gl3w
+)
+
+target_link_libraries(gl3w
+    PUBLIC
+    ${CMAKE_DL_LIBS}
+)
 
 add_library(imgui
     STATIC
